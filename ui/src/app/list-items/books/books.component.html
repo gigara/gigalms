@@ -1,0 +1,52 @@
+<div class="row books">
+        <h3>Books</h3>
+        <ng-container class="search">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </ng-container>
+        <div class="tableContainer">
+        <mat-table [dataSource]='dataSource' matSort>
+                <ng-container matColumnDef="isbn">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ISBN</mat-header-cell>
+                <mat-cell *matCellDef="let book">{{book.isbn}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                        <mat-cell *matCellDef="let book">{{book.title}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="author">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+                        <mat-cell *matCellDef="let book">{{book.authors}}</mat-cell>
+                </ng-container>  
+                <ng-container matColumnDef="publisher">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Publisher</mat-header-cell>
+                        <mat-cell *matCellDef="let book">{{book.publisher}}</mat-cell>
+                </ng-container>  
+                <ng-container matColumnDef="publicationDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Publication Date</mat-header-cell>
+                        <mat-cell *matCellDef="let book">{{book.publicationDate}}</mat-cell>
+                </ng-container>   
+                <ng-container matColumnDef="pages">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Pages</mat-header-cell>
+                        <mat-cell *matCellDef="let book">{{book.noOfPages}}</mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="availability">
+                        <mat-header-cell *matHeaderCellDef>Availablity</mat-header-cell>
+                        <mat-cell *matCellDef="let book">
+                        <div *ngIf="isAvailable(book.borrowDetails); then T; else X"></div>
+                        <ng-template #T><i class="material-icons available">playlist_add_check</i></ng-template>
+                        <ng-template #X><i class="material-icons notAvailable">close</i></ng-template>
+                        </mat-cell>
+                </ng-container>
+                
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;" color="primary"></mat-header-row>
+                <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+        </mat-table>
+        </div>
+
+<div class="float">
+        <button (click)="openFormModal()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+        </div>
+</div>
+

@@ -1,0 +1,103 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New Book</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    &times;
+  </button>
+</div>
+<div class="modal-body">
+  
+  <form [formGroup]="addNewBookForm" (ngSubmit)="submitForm()">
+  <div class="form-group">
+      <label>ISBN</label>
+      <input type="text" maxlength="9" formControlName="isbn" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.isbn.errors }" />
+      <div *ngIf="submitted && f.isbn.errors" class="invalid-feedback">
+          <div *ngIf="f.isbn.errors.required">ISBN is required</div>
+      </div>
+  </div>
+  <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Sector</label>
+    <input type="text" formControlName="sector" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sector.errors }" />
+    <div *ngIf="submitted && f.Sector.errors" class="invalid-feedback">
+        <div *ngIf="f.Sector.errors.required">Sector is required</div>
+    </div>
+</div>
+
+<div formArrayName="authors">
+    <div *ngFor="let author of addNewBookForm.controls.authors.controls; let i=index">
+        <div class="panel-body" [formGroupName]="i">
+            <div class="form-group">
+                <label>Author {{i+1}}</label>
+                <input type="text" formControlName="author" class="form-control author" [ngClass]="{ 'is-invalid': submitted && f.author.errors }" />
+                <a *ngIf="i==0" (click)="addAuthor()" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
+                <a *ngIf="i!=0" (click)="removeAuthor(i)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a>
+                <div *ngIf="submitted && f.author.errors" class="invalid-feedback">
+                    <div *ngIf="f.author.errors.required">Author is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="form-group">
+      <label>Publisher</label>
+      <input type="text" formControlName="publisher" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.publisher.errors }" />
+      <div *ngIf="submitted && f.publisher.errors" class="invalid-feedback">
+          <div *ngIf="f.publisher.errors.required">Publisher is required</div>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Publisher</label>
+    <input type="date" formControlName="publisheDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.publisheDate.errors }" />
+    <div *ngIf="submitted && f.publisheDate.errors" class="invalid-feedback">
+        <div *ngIf="f.publisheDate.errors.required">Publisher is required</div>
+    </div>
+</div>
+  <div class="form-group">
+      <label>No of Pages</label>
+      <input type="number" formControlName="noOfPages" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.noOfPages.errors }" />
+      <div *ngIf="submitted && f.noOfPages.errors" class="invalid-feedback">
+          <div *ngIf="f.noOfPages.errors.required">No of Pages is required</div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-success"[disabled]="!addNewBookForm.valid"> Add </button>
+    </div>
+  </form>
+
+<div class="LoaderBalls">
+        <div class="LoaderBalls__item"></div>
+        <div class="LoaderBalls__item"></div>
+        <div class="LoaderBalls__item"></div>
+</div>
+
+<div class="error">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+        <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+        <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+        <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+    </svg>
+</div>
+
+<div class="check_mark">
+    <div class="sa-icon sa-success animate">
+        <span class="sa-line sa-tip animateSuccessTip"></span>
+        <span class="sa-line sa-long animateSuccessLong"></span>
+        <div class="sa-placeholder"></div>
+        <div class="sa-fix"></div>
+    </div>
+</div>
+<div class="alert alert-error">
+    <strong>Error!</strong> {{responseMsg}} 
+</div>
+<div class="alert alert-success">
+    <strong>Success!</strong> {{responseMsg}} 
+</div>    
+</div>
+

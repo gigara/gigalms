@@ -1,0 +1,28 @@
+<div class="row reports">
+    <mat-table [dataSource]='dataSource' matSort matSortActive="borrowedDate" matSortDirection="desc">
+          <ng-container matColumnDef="isbn">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>ISBN</mat-header-cell>
+              <mat-cell *matCellDef="let report">{{report.isbn}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="title">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                  <mat-cell *matCellDef="let report">{{report.title}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="reader">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Current Reader</mat-header-cell>
+                  <mat-cell *matCellDef="let report">{{report.reader}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="borrowedDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Borrowed Date</mat-header-cell>
+                <mat-cell *matCellDef="let report">{{report.borrowedDate}}</mat-cell>
+          </ng-container>  
+          <ng-container matColumnDef="fine">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Fine</mat-header-cell>
+                  <mat-cell *matCellDef="let report">{{report.fine}}</mat-cell>
+          </ng-container>
+           
+          <mat-header-row *matHeaderRowDef="displayedColumns" color="primary"></mat-header-row>
+          <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+

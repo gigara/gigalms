@@ -1,0 +1,60 @@
+<div class="row dvds">
+        <h3>DVDs</h3>
+        <ng-container class="search">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </ng-container>
+        <div class="tableContainer">
+        <mat-table [dataSource]='dataSource' matSort>
+              <ng-container matColumnDef="isbn">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ISBN</mat-header-cell>
+                  <mat-cell *matCellDef="let dvd">{{dvd.isbn}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="title">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                      <mat-cell *matCellDef="let dvd">{{dvd.title}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="sector">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Sector</mat-header-cell>
+                <mat-cell *matCellDef="let dvd">{{dvd.sector}}</mat-cell>
+                </ng-container>
+              <ng-container matColumnDef="producer">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Producer</mat-header-cell>
+                      <mat-cell *matCellDef="let dvd">{{dvd.producer}}</mat-cell>
+              </ng-container>  
+              <ng-container matColumnDef="publishDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Publication Date</mat-header-cell>
+                      <mat-cell *matCellDef="let dvd">{{dvd.publicationDate}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actors">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Actors</mat-header-cell>
+                <mat-cell *matCellDef="let dvd">{{dvd.actors}}</mat-cell>
+                </ng-container>   
+              <ng-container matColumnDef="language">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Language</mat-header-cell>
+                      <mat-cell *matCellDef="let dvd">{{dvd.language}}</mat-cell>
+              </ng-container> 
+              <ng-container matColumnDef="subtitles">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subtitles</mat-header-cell>
+                <mat-cell *matCellDef="let dvd">{{dvd.subtitles}}</mat-cell>
+                </ng-container> 
+                <ng-container matColumnDef="availability">
+                                <mat-header-cell *matHeaderCellDef>Availablity</mat-header-cell>
+                                <mat-cell *matCellDef="let dvd">
+                                <div *ngIf="isAvailable(dvd.borrowDetails); then T; else X"></div>
+                                <ng-template #T><i class="material-icons available">playlist_add_check</i></ng-template>
+                                <ng-template #X><i class="material-icons notAvailable">close</i></ng-template>
+                                </mat-cell>
+                        </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;" color="primary"></mat-header-row>
+              <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+          </mat-table>
+        </div>
+
+<div class="float">
+        <button (click)="openFormModal()" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mode_edit</i></a>
+        </div>
+</div>
+    
+    

@@ -1,0 +1,125 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New DVD</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    &times;
+  </button>
+</div>
+<div class="modal-body">
+  
+  <form [formGroup]="addNewDVDForm" (ngSubmit)="submitForm()">
+  <div class="form-group">
+      <label>ISBN</label>
+      <input type="text" maxlength="9" formControlName="isbn" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.isbn.errors }" />
+      <div *ngIf="submitted && f.isbn.errors" class="invalid-feedback">
+          <div *ngIf="f.isbn.errors.required">ISBN is required</div>
+      </div>
+  </div>
+  <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+      <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+      </div>
+  </div>
+  <div class="form-group">
+    <label>Sector</label>
+    <input type="text" formControlName="sector" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sector.errors }" />
+    <div *ngIf="submitted && f.sector.errors" class="invalid-feedback">
+        <div *ngIf="f.sector.errors.required">Sector is required</div>
+    </div>
+    </div>
+    <div class="form-group">
+        <label>Producer</label>
+        <input type="text" formControlName="producer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.producer.errors }" />
+        <div *ngIf="submitted && f.producer.errors" class="invalid-feedback">
+            <div *ngIf="f.producer.errors.required">Producer is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Publication Date</label>
+        <input type="date" formControlName="pubDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pubDate.errors }" />
+        <div *ngIf="submitted && f.pubDate.errors" class="invalid-feedback">
+            <div *ngIf="f.pubDate.errors.required">Publication Date is required</div>
+        </div>
+    </div>
+
+    <div formArrayName="actor">
+        <div *ngFor="let actor of addNewDVDForm.controls.actor.controls; let i=index">
+            <div class="panel-body" [formGroupName]="i">
+                <div class="form-group">
+                    <label>Actor {{i+1}}</label>
+                    <input type="text" formControlName="actor" class="form-control actor" [ngClass]="{ 'is-invalid': submitted && f.actor.errors }" />
+                    <a *ngIf="i==0" (click)="addActor()" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
+                    <a *ngIf="i!=0" (click)="removeActor(i)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a>
+                    <div *ngIf="submitted && f.actor.errors" class="invalid-feedback">
+                        <div *ngIf="f.actor.errors.required">Actor is required</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <div class="form-group">
+      <label>Language</label>
+      <input type="text" formControlName="language" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.language.errors }" />
+      <div *ngIf="submitted && f.language.errors" class="invalid-feedback">
+          <div *ngIf="f.language.errors.required">Language is required</div>
+      </div>
+  </div>
+  
+  <div formArrayName="subtitle">
+    <div *ngFor="let actor of addNewDVDForm.controls.subtitle.controls; let i=index">
+        <div class="panel-body" [formGroupName]="i">
+            <div class="form-group">
+                <label>Subtitle {{i+1}}</label>
+                <input type="text" formControlName="subtitle" class="form-control subtitle" [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }" />
+                <a *ngIf="i==0" (click)="addSubtitle()" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">add</i></a>
+                <a *ngIf="i!=0" (click)="removeSubtitle(i)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a>
+                <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
+                    <div *ngIf="f.subtitle.errors.required">Subtitle is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <div class="modal-footer">
+      <button class="btn btn-success"
+        [disabled]="!addNewDVDForm.valid">
+        Add
+      </button>
+    </div>
+  </form>
+  
+<div class="LoaderBalls">
+    <div class="LoaderBalls__item"></div>
+    <div class="LoaderBalls__item"></div>
+    <div class="LoaderBalls__item"></div>
+</div>
+
+<div class="error">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+    <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+    <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+    <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+</svg>
+</div>
+
+<div class="check_mark">
+<div class="sa-icon sa-success animate">
+    <span class="sa-line sa-tip animateSuccessTip"></span>
+    <span class="sa-line sa-long animateSuccessLong"></span>
+    <div class="sa-placeholder"></div>
+    <div class="sa-fix"></div>
+</div>
+</div>
+
+<div class="alert alert-error">
+    <strong>Error!</strong> {{responseMsg}} 
+</div>
+<div class="alert alert-success">
+    <strong>Success!</strong> {{responseMsg}} 
+</div>
+
+</div>
+
