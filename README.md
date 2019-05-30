@@ -1,5 +1,5 @@
 # Library Management System - Gigara @ G Soft Solutions
-Simple Library Management System using Play Framework &amp; Angular 6
+Simple Library Management System using Play Framework(Java) &amp; Angular 6
 
 Live project link : https://lms.gigara.info
 
@@ -17,4 +17,4 @@ Live project link : https://lms.gigara.info
   sbt run
 </code>
 
-This will automatically start both scala server & angular server.
+This will automatically start both play server & angular server.
