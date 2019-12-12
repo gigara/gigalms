@@ -1,5 +1,5 @@
 # Library Management System
-Simple Library Management System using Play Framework(Java 8) &amp; Angular 6
+Simple Library Management System using Play Framework(Java 8) &amp; Angular 6 with SQL database
 
 * Add items
 * Delete items
