@@ -1,5 +1,13 @@
-# Library Management System - Gigara @ G Soft Solutions
-Simple Library Management System using Play Framework(Java) &amp; Angular 6
+# Library Management System
+Simple Library Management System using Play Framework(Java 8) &amp; Angular 6
+
+* Add items
+* Delete items
+* Reserve items
+* Borrow items
+* Return items
+* Availability check
+* Fine calculation
 
 Live project link : https://lms.gigara.info
 
